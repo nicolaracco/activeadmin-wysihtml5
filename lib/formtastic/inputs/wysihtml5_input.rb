@@ -14,6 +14,10 @@ module Formtastic
         all: [ :h1, :h2, :h3, :h4, :h5, :h6, :p ]
       }
 
+      FONTS_PRESET = {
+        basic: [ :'x-small', :small, :medium, :large, :'x-large' ]
+      }
+
       HEIGHT_PRESET = {
         tiny: 70,
         small: 90,
@@ -56,7 +60,7 @@ module Formtastic
       def toolbar_fonts
         blocks = options[:fonts] || input_html_options[:fonts] || :basic
         if !blocks.is_a? Array
-          blocks = BLOCKS_PRESET[blocks.to_sym]
+          blocks = FONTS_PRESET[blocks.to_sym]
         end
 
         if blocks.any?
