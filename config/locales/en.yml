@@ -21,6 +21,7 @@ en:
         h5: "Heading 5"
         h6: "Heading 6"
         p: "Paragraph"
+      font_style: "Font"
 
       dialog:
         cancel: "Cancel"

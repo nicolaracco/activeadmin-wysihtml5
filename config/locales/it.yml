@@ -23,6 +23,8 @@ it:
         h6: "Intestazione 6"
         p: "Paragrafo"
 
+      font_style: "Dimensione"
+
       dialog:
         cancel: "Annulla"
         ok: "OK"

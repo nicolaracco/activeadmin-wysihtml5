@@ -53,6 +53,37 @@ module Formtastic
         end
       end
 
+      def toolbar_fonts
+        blocks = options[:fonts] || input_html_options[:fonts] || :basic
+        if !blocks.is_a? Array
+          blocks = BLOCKS_PRESET[blocks.to_sym]
+        end
+
+        if blocks.any?
+          template.content_tag(:li) do
+            template.content_tag(:div, class: "editor-command blocks-selector") do
+              template.content_tag(:span, I18n.t("wysihtml5.font_style")) <<
+              template.content_tag(:ul) do
+                blocks.map do |block|
+                  template.content_tag(:li) do
+                    template.content_tag(
+                      :a,
+                      I18n.t("wysihtml5.fonts.#{block}", default: block.to_s.titleize),
+                      href: "javascript:void(0);",
+                      data: {
+                        wysihtml5_command: 'fontSize',
+                        wysihtml5_command_value: block
+                    })
+                  end
+                end.join.html_safe
+              end
+            end
+          end
+        else
+          "".html_safe
+        end
+      end
+
       def toolbar_command_groups
         [
           [ :bold, :italic, :underline ],
@@ -69,7 +100,8 @@ module Formtastic
           image: 'insertImage',
           ul: 'insertUnorderedList',
           ol: 'insertOrderedList',
-          source: 'change_view'
+          source: 'change_view',
+          font_size: 'fontSize'
         }
       end
 
@@ -106,7 +138,7 @@ module Formtastic
 
       def toolbar
         template.content_tag(:ul, id: "#{input_html_options[:id]}-toolbar", class: "toolbar") do
-          toolbar_blocks << toolbar_commands
+          toolbar_blocks << toolbar_fonts << toolbar_commands
         end << toolbar_dialogs
       end
 
