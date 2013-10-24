@@ -53,32 +53,37 @@ module Formtastic
         end
       end
 
-      def toolbar_commands
-        command_groups = [
+      def toolbar_command_groups
+        [
           [ :bold, :italic, :underline ],
           [ :ul, :ol, :outdent, :indent ],
           [ :link ],
           [ :image ],
           [ :source ]
         ]
-        command_mapper = {
+      end
+
+      def toolbar_command_mappings
+        {
           link: 'createLink',
           image: 'insertImage',
           ul: 'insertUnorderedList',
           ol: 'insertOrderedList',
           source: 'change_view'
         }
+      end
 
+      def toolbar_commands
         toolbar_commands = options[:commands] || input_html_options[:commands] || :basic
         if !toolbar_commands.is_a? Array
           toolbar_commands = COMMANDS_PRESET[toolbar_commands.to_sym]
         end
 
-        command_groups.map do |group|
+        toolbar_command_groups.map do |group|
           commands = ''
           group.each do |command|
             if toolbar_commands.include? command
-              wysihtml5_command = command_mapper[command.to_sym] || command.to_s
+              wysihtml5_command = toolbar_command_mappings[command.to_sym] || command.to_s
               title = I18n.t("wysihtml5.command.#{command}", default: command.to_s.titleize)
               commands << template.content_tag(
                 :a,
