@@ -24,6 +24,12 @@ it:
         p: "Paragrafo"
 
       font_style: "Dimensione"
+      fonts:
+        x-large: Extra Grande
+        large: Grande
+        medium: Medio
+        small: Piccolo
+        x-small: Extra Piccolo
 
       dialog:
         cancel: "Annulla"

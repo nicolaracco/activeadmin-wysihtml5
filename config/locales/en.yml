@@ -22,6 +22,12 @@ en:
         h6: "Heading 6"
         p: "Paragraph"
       font_style: "Font"
+      fonts:
+        x-large: Extra Large
+        large: Large
+        medium: Medium
+        small: Small
+        x-small: Extra Small
 
       dialog:
         cancel: "Cancel"
